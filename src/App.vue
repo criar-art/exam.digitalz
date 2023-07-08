@@ -25,7 +25,8 @@ const drawer = ref(false)
     >
       <v-list density="compact" nav>
         <v-list-item prepend-icon="mdi-home-city" title="Home" value="home" to="/"></v-list-item>
-        <v-list-item prepend-icon="mdi-account" title="My Account" value="account" to="/about"></v-list-item>
+        <v-list-item prepend-icon="mdi-login" title="Login" value="login" to="/login"></v-list-item>
+        <v-list-item prepend-icon="mdi-information" title="About" value="about" to="/about"></v-list-item>
         <!-- <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item> -->
       </v-list>
     </v-navigation-drawer>

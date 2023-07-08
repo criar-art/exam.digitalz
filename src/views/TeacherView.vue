@@ -1,5 +1,5 @@
 <template>
   <main>
-    <h1>Login</h1>
+    <h1>Teacher View</h1>
   </main>
 </template>

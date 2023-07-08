@@ -24,64 +24,62 @@ const resetValidation = () => {
 </script>
 
 <template>
-  <main>
-    <h1>Login</h1>
-    <v-sheet width="300" class="mx-auto">
-      <v-form ref="form">
-        <v-text-field
-          v-model="email"
-          :counter="10"
-          :rules="emailRules"
-          label="Email"
-          type="email"
-          required
-        ></v-text-field>
+  <h1>Login</h1>
+  <v-sheet width="300">
+    <v-form ref="form">
+      <v-text-field
+        v-model="email"
+        :counter="10"
+        :rules="emailRules"
+        label="Email"
+        type="email"
+        required
+      ></v-text-field>
 
-        <v-text-field
-          v-model="password"
-          :counter="10"
-          :rules="[v => !!v || 'Password is required']"
-          label="Password"
-          type="password"
-          required
-        ></v-text-field>
+      <v-text-field
+        v-model="password"
+        :counter="10"
+        :rules="[v => !!v || 'Password is required']"
+        label="Password"
+        type="password"
+        required
+      ></v-text-field>
 
-        <v-checkbox
-          v-model="checkbox"
-          :rules="[v => !!v || 'You must agree to continue!']"
-          label="Do you agree?"
-          required
-        ></v-checkbox>
+      <v-checkbox
+        v-model="checkbox"
+        :rules="[v => !!v || 'You must agree to continue!']"
+        label="Do you agree?"
+        required
+      ></v-checkbox>
 
-        <div class="d-flex flex-column">
-          <v-btn
-            color="success"
-            class="mt-4"
-            block
-            @click="validate"
-          >
-            Validate
-          </v-btn>
+      <div class="d-flex flex-column">
+        <v-btn
+          color="success"
+          class="mt-4"
+          block
+          @click="validate"
+        >
+          Validate
+        </v-btn>
 
-          <v-btn
-            color="error"
-            class="mt-4"
-            block
-            @click="reset"
-          >
-            Reset Form
-          </v-btn>
+        <v-btn
+          color="error"
+          class="mt-4"
+          block
+          @click="reset"
+        >
+          Reset Form
+        </v-btn>
 
-          <v-btn
-            color="warning"
-            class="mt-4"
-            block
-            @click="resetValidation"
-          >
-            Reset Validation
-          </v-btn>
-        </div>
-      </v-form>
-    </v-sheet>
-  </main>
+        <v-btn
+          color="warning"
+          class="mt-4"
+          block
+          @click="resetValidation"
+        >
+          Reset Validation
+        </v-btn>
+      </div>
+    </v-form>
+  </v-sheet>
 </template>

@@ -29,10 +29,8 @@ const drawer = ref(false)
         <!-- <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item> -->
       </v-list>
     </v-navigation-drawer>
-    <v-main>
-      <v-card-text>
-        <RouterView />
-      </v-card-text>
+    <v-main class="ma-10">
+      <RouterView />
     </v-main>
   </v-layout>
 </template>

@@ -13,9 +13,9 @@ const drawer = ref(false)
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer" />
       <v-toolbar-title>Exam-Digitalz</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn variant="text" icon="mdi-magnify"></v-btn>
+      <!-- <v-btn variant="text" icon="mdi-magnify"></v-btn>
       <v-btn variant="text" icon="mdi-filter"></v-btn>
-      <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
+      <v-btn variant="text" icon="mdi-dots-vertical"></v-btn> -->
     </v-app-bar>
 
     <v-navigation-drawer
@@ -26,7 +26,7 @@ const drawer = ref(false)
       <v-list density="compact" nav>
         <v-list-item prepend-icon="mdi-home-city" title="Home" value="home" to="/"></v-list-item>
         <v-list-item prepend-icon="mdi-account" title="My Account" value="account" to="/about"></v-list-item>
-        <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
+        <!-- <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item> -->
       </v-list>
     </v-navigation-drawer>
     <v-main>

@@ -13,7 +13,9 @@ const checkbox = ref(false)
 const validate = async () => {
   const { valid } = await form.value.validate()
 
-  if (valid) alert('Form is valid')
+  if (valid) {
+    alert('Form is valid')
+  }
 }
 const reset = () => {
   form.value.reset()

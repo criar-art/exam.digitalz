@@ -11,7 +11,7 @@ const drawer = ref(false)
       prominent
     >
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer" />
-      <v-toolbar-title>Exam-Digitalz</v-toolbar-title>
+      <v-toolbar-title>Exam Digitalz</v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- <v-btn variant="text" icon="mdi-magnify"></v-btn>
       <v-btn variant="text" icon="mdi-filter"></v-btn>
@@ -33,5 +33,10 @@ const drawer = ref(false)
     <v-main class="ma-10">
       <RouterView />
     </v-main>
+    <v-footer app class="d-flex flex-column">
+      <div class="px-4 py-2 bg-black text-center w-100">
+        {{ new Date().getFullYear() }} — <strong>Exam Digitalz</strong>
+      </div>
+    </v-footer>
   </v-layout>
 </template>

@@ -52,6 +52,7 @@ const validate = async () => {
         class="mt-4"
         block
         v-bind="props"
+        prepend-icon="mdi-plus-circle"
       >
         Create a exam
       </v-btn>
@@ -139,6 +140,7 @@ const validate = async () => {
                 color="green-darken-1"
                 variant="text"
                 @click="dialog = false"
+                append-icon="mdi-plus-circle"
               >
                 New Question
               </v-btn>

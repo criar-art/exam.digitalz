@@ -17,9 +17,11 @@ const validate = async () => {
     alert('Form is valid')
   }
 }
+
 const reset = () => {
   form.value.reset()
 }
+
 const resetValidation = () => {
   form.value.resetValidation()
 }

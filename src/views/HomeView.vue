@@ -10,6 +10,7 @@ const name = ref('')
 const description = ref('')
 const questionTitle = ref('')
 const questionDescription = ref('')
+const answerTitle = ref('')
 const nameRules = [
   v => !!v || 'Name is required',
 ]
@@ -22,9 +23,20 @@ const questionTitleRules = [
 const questionDescriptionRules = [
   v => !!v || 'Description is required',
 ]
+const answerTitleRules = [
+  v => !!v || 'Answer title is required',
+]
 
 function createExam() {
   localStorage.setItem(`exam-${uuidv4()}`, "Teste")
+}
+
+const validate = async () => {
+  const { valid } = await form.value.validate()
+
+  if (valid) {
+    step.value = 1;
+  }
 }
 </script>
 
@@ -146,9 +158,9 @@ function createExam() {
         <v-btn
           color="green-darken-1"
           variant="text"
-          @click="step = step == 0 ? 1 : step"
+          @click="validate"
         >
-          Next
+          {{ step == 0 ? 'Next' : 'Finish' }}
         </v-btn>
       </v-card-actions>
     </v-card>

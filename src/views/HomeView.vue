@@ -14,6 +14,7 @@ const answerTitleOne = ref('')
 const answerTitleTwo = ref('')
 const answerTitleThree = ref('')
 const answerTitleFour = ref('')
+const answerNumber = ref(false)
 const nameRules = [
   v => !!v || 'Name is required',
 ]
@@ -90,6 +91,7 @@ const validate = async () => {
             ></v-textarea >
           </template>
           <template v-if="step == 1">
+            <h5 class="text-h5 mb-4">Question</h5>
             <v-text-field
               v-model="questionTitle"
               :counter="50"
@@ -105,6 +107,8 @@ const validate = async () => {
               label="Description of question"
               required
             ></v-textarea>
+            <h5 class="text-h5">Answers</h5>
+            <v-switch :label="answerNumber ? 'Number' : 'Alphabet'" v-model="answerNumber"></v-switch>
             <v-text-field
               v-model="answerTitleOne"
               :counter="50"
@@ -112,7 +116,7 @@ const validate = async () => {
               label="Answer one of question"
               type="text"
               required
-              prepend-icon="mdi-alpha-a-box"
+              :prepend-icon="answerNumber ? 'mdi-numeric-1-box' : 'mdi-alpha-a-box'"
             ></v-text-field>
             <v-text-field
               v-model="answerTitleTwo"
@@ -121,7 +125,7 @@ const validate = async () => {
               label="Answer two of question"
               type="text"
               required
-              prepend-icon="mdi-alpha-b-box"
+              :prepend-icon="answerNumber ? 'mdi-numeric-2-box' : 'mdi-alpha-b-box'"
             ></v-text-field>
             <v-text-field
               v-model="answerTitleThree"
@@ -130,7 +134,7 @@ const validate = async () => {
               label="Answer three of question"
               type="text"
               required
-              prepend-icon="mdi-alpha-c-box"
+              :prepend-icon="answerNumber ? 'mdi-numeric-3-box' : 'mdi-alpha-c-box'"
             ></v-text-field>
             <v-text-field
               v-model="answerTitleFour"
@@ -139,7 +143,7 @@ const validate = async () => {
               label="Answer four of question"
               type="text"
               required
-              prepend-icon="mdi-alpha-d-box"
+              :prepend-icon="answerNumber ? 'mdi-numeric-4-box' : 'mdi-alpha-d-box'"
             ></v-text-field>
             <v-card-actions>
               <v-spacer></v-spacer>

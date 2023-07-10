@@ -3,6 +3,25 @@ import { ref } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
 
 const dialog = ref(false);
+const step = ref(0);
+
+const form = ref(null)
+const name = ref('')
+const description = ref('')
+const questionTitle = ref('')
+const questionDescription = ref('')
+const nameRules = [
+  v => !!v || 'Name is required',
+]
+const descriptionRules = [
+  v => !!v || 'Description is required',
+]
+const questionTitleRules = [
+  v => !!v || 'Title of question is required',
+]
+const questionDescriptionRules = [
+  v => !!v || 'Description is required',
+]
 
 function createExam() {
   localStorage.setItem(`exam-${uuidv4()}`, "Teste")
@@ -27,24 +46,109 @@ function createExam() {
     </template>
     <v-card>
       <v-card-title class="text-h5">
-        Create a new exam
+        {{ step == 0 ? 'Create a new exam' : 'Create a question of exam' }}
       </v-card-title>
-      <v-card-text>Let's go write for a new exam and publish easy!</v-card-text>
+      <v-card-text>
+        {{ step == 0
+          ? 'Let\'s go write for a new exam and publish easy!'
+          : 'Write questions for you exam'
+        }}
+      </v-card-text>
+      <v-sheet class="pa-4">
+        <v-form ref="form">
+          <template v-if="step == 0">
+            <v-text-field
+              v-model="name"
+              :counter="50"
+              :rules="nameRules"
+              label="Name of exam"
+              type="text"
+              required
+            ></v-text-field>
+            <v-textarea
+              v-model="description"
+              :counter="250"
+              :rules="descriptionRules"
+              label="Description of exam"
+              required
+            ></v-textarea >
+          </template>
+          <template v-if="step == 1">
+            <v-text-field
+              v-model="questionTitle"
+              :counter="50"
+              :rules="questionTitleRules"
+              label="Title of question"
+              type="text"
+              required
+            ></v-text-field>
+            <v-textarea
+              v-model="questionDescription"
+              :counter="250"
+              :rules="questionDescriptionRules"
+              label="Description of question"
+              required
+            ></v-textarea>
+            <v-text-field
+              v-model="answerTitle"
+              :counter="50"
+              :rules="answerTitleRules"
+              label="Answer of question"
+              type="text"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="answerTitle"
+              :counter="50"
+              :rules="answerTitleRules"
+              label="Answer of question"
+              type="text"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="answerTitle"
+              :counter="50"
+              :rules="answerTitleRules"
+              label="Answer of question"
+              type="text"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="answerTitle"
+              :counter="50"
+              :rules="answerTitleRules"
+              label="Answer of question"
+              type="text"
+              required
+            ></v-text-field>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="green-darken-1"
+                variant="text"
+                @click="dialog = false"
+              >
+                New Question
+              </v-btn>
+            </v-card-actions>
+          </template>
+        </v-form>
+      </v-sheet>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
           color="red-darken-1"
           variant="text"
-          @click="dialog = false"
+          @click="step == 0 ? dialog = false : step = 0"
         >
-          Cancel
+          {{ step == 0 ? 'Cancel' : 'Back' }}
         </v-btn>
         <v-btn
           color="green-darken-1"
           variant="text"
-          @click="dialog = false"
+          @click="step = step == 0 ? 1 : step"
         >
-          Create
+          Next
         </v-btn>
       </v-card-actions>
     </v-card>

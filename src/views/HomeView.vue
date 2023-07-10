@@ -10,7 +10,10 @@ const name = ref('')
 const description = ref('')
 const questionTitle = ref('')
 const questionDescription = ref('')
-const answerTitle = ref('')
+const answerTitleOne = ref('')
+const answerTitleTwo = ref('')
+const answerTitleThree = ref('')
+const answerTitleFour = ref('')
 const nameRules = [
   v => !!v || 'Name is required',
 ]
@@ -103,36 +106,40 @@ const validate = async () => {
               required
             ></v-textarea>
             <v-text-field
-              v-model="answerTitle"
+              v-model="answerTitleOne"
               :counter="50"
               :rules="answerTitleRules"
-              label="Answer of question"
+              label="Answer one of question"
               type="text"
               required
+              prepend-icon="mdi-alpha-a-box"
             ></v-text-field>
             <v-text-field
-              v-model="answerTitle"
+              v-model="answerTitleTwo"
               :counter="50"
               :rules="answerTitleRules"
-              label="Answer of question"
+              label="Answer two of question"
               type="text"
               required
+              prepend-icon="mdi-alpha-b-box"
             ></v-text-field>
             <v-text-field
-              v-model="answerTitle"
+              v-model="answerTitleThree"
               :counter="50"
               :rules="answerTitleRules"
-              label="Answer of question"
+              label="Answer three of question"
               type="text"
               required
+              prepend-icon="mdi-alpha-c-box"
             ></v-text-field>
             <v-text-field
-              v-model="answerTitle"
+              v-model="answerTitleFour"
               :counter="50"
               :rules="answerTitleRules"
-              label="Answer of question"
+              label="Answer four of question"
               type="text"
               required
+              prepend-icon="mdi-alpha-d-box"
             ></v-text-field>
             <v-card-actions>
               <v-spacer></v-spacer>

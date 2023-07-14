@@ -21,7 +21,7 @@ const questionObject = {
   ]
 };
 
-const questions = ref([ {...questionObject} ])
+const questions = ref([])
 const addQuestion = () => questions.value.push({...questionObject})
 
 const typeAnswer = [
@@ -117,12 +117,11 @@ const validate = async () => {
             ></v-textarea >
           </template>
           <template v-if="step == 1">
-            <h5 class="text-h5 mb-4"></h5>
-            <v-expansion-panels>
+            <v-expansion-panels class="mb-5">
               <v-expansion-panel
                 v-for="(question, i) in questions"
                 :key="i"
-                :title="`Question ${question.title}`"
+                :title="question.title ? question.title : 'Question'"
               >
                 <v-expansion-panel-text>
                   <span>{{ question.title }}</span>
@@ -154,6 +153,7 @@ const validate = async () => {
                       :label="`Answer ${typeAnswer[index]} of question`"
                       type="text"
                       required
+                      :class="{'answer-correct': question.anwserType == typeAnswer[index]}"
                       :prepend-icon="question.typeAlphabet ? 'mdi-numeric-1-box' : 'mdi-alpha-a-box'"
                     >
                       <template v-slot:append-inner>
@@ -177,12 +177,11 @@ const validate = async () => {
             </v-expansion-panels>
 
             <v-card-actions>
-              <v-spacer></v-spacer>
               <v-btn
                 color="green-darken-1"
                 variant="text"
                 @click="addQuestion"
-                append-icon="mdi-plus-circle"
+                prepend-icon="mdi-plus-circle"
               >
                 New Question
               </v-btn>
@@ -210,3 +209,9 @@ const validate = async () => {
     </v-card>
   </v-dialog>
 </template>
+
+<style scoped>
+.answer-correct {
+  color: green;
+}
+</style>

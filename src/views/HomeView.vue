@@ -8,14 +8,29 @@ const step = ref(0);
 const form = ref(null)
 const name = ref('')
 const description = ref('')
-const questionTitle = ref('')
-const questionDescription = ref('')
-const answerTitleOne = ref('')
-const answerTitleTwo = ref('')
-const answerTitleThree = ref('')
-const answerTitleFour = ref('')
-const answerNumber = ref(false)
-const answerCheck = ref('')
+const questionObject = {
+  title: '',
+  description: '',
+  typeAlphabet: false,
+  answerCheck: '',
+  answers: [
+  { value: '' },
+  { value: '' },
+  { value: '' },
+  { value: '' }
+  ]
+};
+
+const questions = ref([ {...questionObject} ])
+const addQuestion = () => questions.value.push({...questionObject})
+
+const typeAnswer = [
+  'One',
+  'Two',
+  'Three',
+  'Four'
+]
+
 const nameRules = [
   v => !!v || 'Name is required',
 ]
@@ -102,126 +117,71 @@ const validate = async () => {
             ></v-textarea >
           </template>
           <template v-if="step == 1">
-            <h5 class="text-h5 mb-4">Question</h5>
-            <v-text-field
-              v-model="questionTitle"
-              :counter="50"
-              :rules="questionTitleRules"
-              label="Title of question"
-              type="text"
-              required
-            ></v-text-field>
-            <v-textarea
-              v-model="questionDescription"
-              :counter="250"
-              :rules="questionDescriptionRules"
-              label="Description of question"
-              required
-            ></v-textarea>
-            <h5 class="text-h5">Answers</h5>
-            <v-switch :label="answerNumber ? 'Number' : 'Alphabet'" v-model="answerNumber"></v-switch>
-            <v-text-field
-              v-model="answerTitleOne"
-              :counter="50"
-              :rules="answerTitleRules"
-              label="Answer one of question"
-              type="text"
-              required
-              :prepend-icon="answerNumber ? 'mdi-numeric-1-box' : 'mdi-alpha-a-box'"
-            >
-              <template v-slot:append-inner>
-                <v-tooltip
-                  location="start"
-                  :text="answerCheck == 'titleOne' ? 'Answer correct!' : 'Wrong answer!'"
-                >
-                  <template v-slot:activator="{ props }">
-                    <v-icon
-                      v-bind="props"
-                      @click="answerCheck = 'titleOne'"
-                      :icon="answerCheck == 'titleOne' ? 'mdi-check' : 'mdi-close'"
-                    />
+            <h5 class="text-h5 mb-4"></h5>
+            <v-expansion-panels>
+              <v-expansion-panel
+                v-for="(question, i) in questions"
+                :key="i"
+                :title="`Question ${question.title}`"
+              >
+                <v-expansion-panel-text>
+                  <span>{{ question.title }}</span>
+                  <v-text-field
+                    v-model="question.title"
+                    :counter="50"
+                    :rules="questionTitleRules"
+                    label="Title of question"
+                    type="text"
+                    required
+                  />
+                  <v-textarea
+                    v-model="question.description"
+                    :counter="250"
+                    :rules="questionDescriptionRules"
+                    label="Description of question"
+                    required
+                  />
+                  <h5 class="text-h5">Answers</h5>
+                  <v-switch
+                    :label="question.typeAlphabet ? 'Number' : 'Alphabet'"
+                    v-model="question.typeAlphabet"
+                  />
+                  <template v-for="(answer, index) in question.answers" :key="index">
+                    <v-text-field
+                      v-model="answer.value"
+                      :counter="50"
+                      :rules="answerTitleRules"
+                      :label="`Answer ${typeAnswer[index]} of question`"
+                      type="text"
+                      required
+                      :prepend-icon="question.typeAlphabet ? 'mdi-numeric-1-box' : 'mdi-alpha-a-box'"
+                    >
+                      <template v-slot:append-inner>
+                        <v-tooltip
+                          location="start"
+                          :text="question.anwserType == typeAnswer[index] ? 'Answer correct!' : 'Wrong answer!'"
+                        >
+                          <template v-slot:activator="{ props }">
+                            <v-icon
+                              v-bind="props"
+                              @click="question.anwserType = typeAnswer[index]"
+                              :icon="question.anwserType == typeAnswer[index] ? 'mdi-check' : 'mdi-close'"
+                            />
+                          </template>
+                        </v-tooltip>
+                      </template>
+                    </v-text-field>
                   </template>
-                </v-tooltip>
-              </template>
-            </v-text-field>
-            <v-text-field
-              v-model="answerTitleTwo"
-              :counter="50"
-              :rules="answerTitleRules"
-              label="Answer two of question"
-              type="text"
-              required
-              :prepend-icon="answerNumber ? 'mdi-numeric-2-box' : 'mdi-alpha-b-box'"
-            >
-              <template v-slot:append-inner>
-                <v-tooltip
-                  location="start"
-                  :text="answerCheck == 'titleTwo' ? 'Answer correct!' : 'Wrong answer!'"
-                >
-                  <template v-slot:activator="{ props }">
-                    <v-icon
-                      v-bind="props"
-                      @click="answerCheck = 'titleTwo'"
-                      :icon="answerCheck == 'titleTwo' ? 'mdi-check' : 'mdi-close'"
-                    />
-                  </template>
-                </v-tooltip>
-              </template>
-            </v-text-field>
-            <v-text-field
-              v-model="answerTitleThree"
-              :counter="50"
-              :rules="answerTitleRules"
-              label="Answer three of question"
-              type="text"
-              required
-              :prepend-icon="answerNumber ? 'mdi-numeric-3-box' : 'mdi-alpha-c-box'"
-            >
-              <template v-slot:append-inner>
-                <v-tooltip
-                  location="start"
-                  :text="answerCheck == 'titleThree' ? 'Answer correct!' : 'Wrong answer!'"
-                >
-                  <template v-slot:activator="{ props }">
-                    <v-icon
-                      v-bind="props"
-                      @click="answerCheck = 'titleThree'"
-                      :icon="answerCheck == 'titleThree' ? 'mdi-check' : 'mdi-close'"
-                    />
-                  </template>
-                </v-tooltip>
-              </template>
-            </v-text-field>
-            <v-text-field
-              v-model="answerTitleFour"
-              :counter="50"
-              :rules="answerTitleRules"
-              label="Answer four of question"
-              type="text"
-              required
-              :prepend-icon="answerNumber ? 'mdi-numeric-4-box' : 'mdi-alpha-d-box'"
-            >
-              <template v-slot:append-inner>
-                <v-tooltip
-                  location="start"
-                  :text="answerCheck == 'titleFour' ? 'Answer correct!' : 'Wrong answer!'"
-                >
-                  <template v-slot:activator="{ props }">
-                    <v-icon
-                      v-bind="props"
-                      @click="answerCheck = 'titleFour'"
-                      :icon="answerCheck == 'titleFour' ? 'mdi-check' : 'mdi-close'"
-                    />
-                  </template>
-                </v-tooltip>
-              </template>
-            </v-text-field>
+                </v-expansion-panel-text>
+              </v-expansion-panel>
+            </v-expansion-panels>
+
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
                 color="green-darken-1"
                 variant="text"
-                @click="dialog = false"
+                @click="addQuestion"
                 append-icon="mdi-plus-circle"
               >
                 New Question

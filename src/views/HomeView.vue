@@ -31,7 +31,15 @@ const answerTitleRules = [
   v => !!v || 'Answer title is required',
 ]
 
-function createExam() {
+function changeExam() {
+  if (Boolean(form.value.items.length)) {
+    console.log(form.value.items)
+
+    form?.values?.items.map((item) => {
+      console.log(item)
+    })
+  }
+
   localStorage.setItem(`exam-${uuidv4()}`, "Teste")
 }
 
@@ -39,6 +47,7 @@ const validate = async () => {
   const { valid } = await form.value.validate()
 
   if (valid) {
+    changeExam()
     step.value = 1;
   }
 }

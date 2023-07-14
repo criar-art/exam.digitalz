@@ -15,6 +15,7 @@ const answerTitleTwo = ref('')
 const answerTitleThree = ref('')
 const answerTitleFour = ref('')
 const answerNumber = ref(false)
+const answerCheck = ref('')
 const nameRules = [
   v => !!v || 'Name is required',
 ]
@@ -127,7 +128,22 @@ const validate = async () => {
               type="text"
               required
               :prepend-icon="answerNumber ? 'mdi-numeric-1-box' : 'mdi-alpha-a-box'"
-            ></v-text-field>
+            >
+              <template v-slot:append-inner>
+                <v-tooltip
+                  location="start"
+                  :text="answerCheck == 'titleOne' ? 'Answer correct!' : 'Wrong answer!'"
+                >
+                  <template v-slot:activator="{ props }">
+                    <v-icon
+                      v-bind="props"
+                      @click="answerCheck = 'titleOne'"
+                      :icon="answerCheck == 'titleOne' ? 'mdi-check' : 'mdi-close'"
+                    />
+                  </template>
+                </v-tooltip>
+              </template>
+            </v-text-field>
             <v-text-field
               v-model="answerTitleTwo"
               :counter="50"
@@ -136,7 +152,22 @@ const validate = async () => {
               type="text"
               required
               :prepend-icon="answerNumber ? 'mdi-numeric-2-box' : 'mdi-alpha-b-box'"
-            ></v-text-field>
+            >
+              <template v-slot:append-inner>
+                <v-tooltip
+                  location="start"
+                  :text="answerCheck == 'titleTwo' ? 'Answer correct!' : 'Wrong answer!'"
+                >
+                  <template v-slot:activator="{ props }">
+                    <v-icon
+                      v-bind="props"
+                      @click="answerCheck = 'titleTwo'"
+                      :icon="answerCheck == 'titleTwo' ? 'mdi-check' : 'mdi-close'"
+                    />
+                  </template>
+                </v-tooltip>
+              </template>
+            </v-text-field>
             <v-text-field
               v-model="answerTitleThree"
               :counter="50"
@@ -145,7 +176,22 @@ const validate = async () => {
               type="text"
               required
               :prepend-icon="answerNumber ? 'mdi-numeric-3-box' : 'mdi-alpha-c-box'"
-            ></v-text-field>
+            >
+              <template v-slot:append-inner>
+                <v-tooltip
+                  location="start"
+                  :text="answerCheck == 'titleThree' ? 'Answer correct!' : 'Wrong answer!'"
+                >
+                  <template v-slot:activator="{ props }">
+                    <v-icon
+                      v-bind="props"
+                      @click="answerCheck = 'titleThree'"
+                      :icon="answerCheck == 'titleThree' ? 'mdi-check' : 'mdi-close'"
+                    />
+                  </template>
+                </v-tooltip>
+              </template>
+            </v-text-field>
             <v-text-field
               v-model="answerTitleFour"
               :counter="50"
@@ -154,7 +200,22 @@ const validate = async () => {
               type="text"
               required
               :prepend-icon="answerNumber ? 'mdi-numeric-4-box' : 'mdi-alpha-d-box'"
-            ></v-text-field>
+            >
+              <template v-slot:append-inner>
+                <v-tooltip
+                  location="start"
+                  :text="answerCheck == 'titleFour' ? 'Answer correct!' : 'Wrong answer!'"
+                >
+                  <template v-slot:activator="{ props }">
+                    <v-icon
+                      v-bind="props"
+                      @click="answerCheck = 'titleFour'"
+                      :icon="answerCheck == 'titleFour' ? 'mdi-check' : 'mdi-close'"
+                    />
+                  </template>
+                </v-tooltip>
+              </template>
+            </v-text-field>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn

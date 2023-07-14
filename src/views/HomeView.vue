@@ -23,7 +23,7 @@ const questionObject = {
 
 const questions = ref([])
 const addQuestion = () => questions.value.push({...questionObject, id: uuidv4() })
-const removeQuestion = (id) => question.value = questions.value.filter((item) => item.id == id)
+const removeQuestion = (id) => questions.value = questions.value.filter((item) => item.id !== id)
 
 const typeAnswer = [
   'a',
@@ -125,7 +125,6 @@ const validate = async () => {
                 :title="question.title ? question.title : 'Question'"
               >
                 <v-expansion-panel-text>
-                  <span>{{ question.title }}</span>
                   <v-text-field
                     v-model="question.title"
                     :counter="50"
@@ -172,15 +171,16 @@ const validate = async () => {
                         </v-tooltip>
                       </template>
                     </v-text-field>
-                    <v-btn
-                      color="green-darken-1"
-                      variant="text"
-                      @click="removeQuestion(question.id)"
-                      prepend-icon="mdi-trash"
-                    >
-
-                    </v-btn>
                   </template>
+
+                  <v-btn
+                    color="red-darken-1"
+                    variant="text"
+                    @click="removeQuestion(question.id)"
+                    prepend-icon="mdi-close"
+                  >
+                    Delete question
+                  </v-btn>
                 </v-expansion-panel-text>
               </v-expansion-panel>
             </v-expansion-panels>

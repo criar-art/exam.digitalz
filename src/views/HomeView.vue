@@ -57,7 +57,8 @@ const validate = async () => {
   <v-dialog
     v-model="dialog"
     persistent
-    width="auto"
+    width="100%"
+    max-width="700"
   >
     <template v-slot:activator="{ props }">
       <v-btn

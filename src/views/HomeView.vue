@@ -22,13 +22,14 @@ const questionObject = {
 };
 
 const questions = ref([])
-const addQuestion = () => questions.value.push({...questionObject})
+const addQuestion = () => questions.value.push({...questionObject, id: uuidv4() })
+const removeQuestion = (id) => question.value = questions.value.filter((item) => item.id == id)
 
 const typeAnswer = [
-  'One',
-  'Two',
-  'Three',
-  'Four'
+  'a',
+  'b',
+  'c',
+  'd'
 ]
 
 const nameRules = [
@@ -150,11 +151,11 @@ const validate = async () => {
                       v-model="answer.value"
                       :counter="50"
                       :rules="answerTitleRules"
-                      :label="`Answer ${typeAnswer[index]} of question`"
+                      :label="`Answer ${question.typeAlphabet ? index + 1 : typeAnswer[index].toUpperCase()} of question`"
                       type="text"
                       required
                       :class="{'answer-correct': question.anwserType == typeAnswer[index]}"
-                      :prepend-icon="question.typeAlphabet ? 'mdi-numeric-1-box' : 'mdi-alpha-a-box'"
+                      :prepend-icon="question.typeAlphabet ? `mdi-numeric-${index + 1}-box` : `mdi-alpha-${typeAnswer[index]}-box`"
                     >
                       <template v-slot:append-inner>
                         <v-tooltip
@@ -171,6 +172,14 @@ const validate = async () => {
                         </v-tooltip>
                       </template>
                     </v-text-field>
+                    <v-btn
+                      color="green-darken-1"
+                      variant="text"
+                      @click="removeQuestion(question.id)"
+                      prepend-icon="mdi-trash"
+                    >
+
+                    </v-btn>
                   </template>
                 </v-expansion-panel-text>
               </v-expansion-panel>
